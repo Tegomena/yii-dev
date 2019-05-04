@@ -1,15 +1,28 @@
 version: '3'
 services:
  yii-db:
-  image: mariadb:latest
+
+# --- Following section for use of MariaDB:
+#  image: mariadb:latest
+#  ports:
+#   - "3306:3306"
+#  volumes:
+#   - /data/yii/mariadb:/var/lib/mysql
+#  environment:
+#   - MYSQL_ROOT_PASSWORD=astrongpassword
+#  hostname: yii-db
+
+# --- Use this section for MySQL:
+  image: mysql:latest
   ports:
    - "3306:3306"
   volumes:
-   - /data/yii/dbdata:/var/lib/mysql
+   - /data/yii/mysql:/var/lib/mysql
   environment:
    - MYSQL_ROOT_PASSWORD=astrongpassword
   hostname: yii-db
     
+# --- The web container - will be needed always:
  yii-web:
   image: thomaszastrow/yii-dev:latest
   ports:
